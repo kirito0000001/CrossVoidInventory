@@ -190,6 +190,7 @@ FInventorySaveData UCP_Inventory::BuildInventorySaveData()
 
 void UCP_Inventory::LoadInventorySaveData(FInventorySaveData InSaveData)
 {
+	ItemDatas.Empty();
 	for (auto Element : InSaveData.ItemSSaveData)
 	{
 		UInventoryBaseItem* Buffer = NewObject<UInventoryBaseItem>(this, Element.Class);
@@ -212,6 +213,11 @@ void UCP_Inventory::LoadInventorySaveData(FInventorySaveData InSaveData)
 		ItemDatas.Add(Buffer);
 		OnInventoryDataRefresh.Broadcast();
 	}
+}
+
+void UCP_Inventory::ClearInventoryData()
+{
+	ItemDatas.Empty();
 }
 
 void UCP_Inventory::RemoveItemByClass(TSubclassOf<UInventoryBaseItem> InClass)
