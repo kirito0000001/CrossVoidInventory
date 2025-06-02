@@ -164,6 +164,10 @@ public: //函数
 	UFUNCTION(BlueprintCallable, Category = "Inventory|Component", DisplayName="加载库存存档数据")
 	void LoadInventorySaveData(FInventorySaveData InSaveData);
 
+	//清空库存数据，在重复读取存档的时候使用
+	UFUNCTION(BlueprintCallable, Category = "Inventory|Component", DisplayName="清空库存数据")
+	void ClearInventoryData();
+
 	/**移除物品_类型
 	 * 直接移除类的所有物品
 	 * @param InClass 物品类型
