@@ -154,6 +154,34 @@ UInventoryBaseItem* UCP_Inventory::GiveItemByClass(int& Residue, TSubclassOf<UIn
 	}
 }
 
+bool UCP_Inventory::GiveItemByClassBatch(TArray<TSubclassOf<UInventoryBaseItem>> InClass)
+{
+	InClass.Remove(nullptr); //先删除空指针
+	if (InClass.IsEmpty()) //列表为空
+	{
+		return false;
+	}
+	TMap<TSubclassOf<UInventoryBaseItem>, int> ItemCount = {}; //物品最后会创建的数量
+	for (auto Element : InClass)
+	{
+		if (ItemCount.Contains(Element)) //列表中已经有这个物品
+		{
+			ItemCount.Add(Element, ItemCount[Element] + 1); //数量加一
+		}
+		else
+		{
+			UInventoryBaseItem* Newitem = NewObject<UInventoryBaseItem>(this, Element); //没有就创建新的物品
+			ItemCount.Add(Element, 1); //初始数量为1
+		}
+	}
+	for (auto Element : ItemCount) //计数完成后，开始给物品
+	{
+		int Useless = 0;
+		return GiveItemByClass(Useless, Element.Key, Element.Value, true);
+	}
+	return false;
+}
+
 TArray<UInventoryBaseItem*> UCP_Inventory::GetItemDatas()
 {
 	return ItemDatas;
