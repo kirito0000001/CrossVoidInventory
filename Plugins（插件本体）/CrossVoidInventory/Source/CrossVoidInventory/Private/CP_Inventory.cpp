@@ -177,7 +177,7 @@ bool UCP_Inventory::GiveItemByClassBatch(TArray<TSubclassOf<UInventoryBaseItem>>
 	for (auto Element : ItemCount) //计数完成后，开始给物品
 	{
 		int Useless = 0;
-		return GiveItemByClass(Useless, Element.Key, Element.Value, true);
+		GiveItemByClass(Useless, Element.Key, Element.Value, true);
 	}
 	return false;
 }
