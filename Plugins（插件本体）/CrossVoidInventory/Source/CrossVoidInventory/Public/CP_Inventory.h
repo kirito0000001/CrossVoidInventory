@@ -146,6 +146,13 @@ public: //函数
 	UInventoryBaseItem* GiveItemByClass(int& Residue, TSubclassOf<UInventoryBaseItem> InClass, int Count = 1,
 	                                    bool UseStack = true);
 
+	/**从类给予道具_批量
+	 * @param InClass 物品的类
+	 * @return 是否成功
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Inventory|Component", DisplayName="从类给予道具_批量")
+	bool GiveItemByClassBatch(TArray<TSubclassOf<UInventoryBaseItem>> InClass);
+
 	/**获取物品合集
 	 * @return 物品合集
 	 */
